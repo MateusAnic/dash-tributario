@@ -1,12 +1,12 @@
 import React from "react";
 import { TitlePage, ContainerDashboard } from "../styles";
-import { DataGridComponent } from "./DataGrid";
+import { DashboardTable } from "../../components/MaterialTable";
 
 const DashboardPage: React.FC = () => {
   return (
     <ContainerDashboard>
       <TitlePage variant="h1">Acompanhamento de Cliente : Anônimo</TitlePage>
-      <DataGridComponent />
+      <DashboardTable />
     </ContainerDashboard>
   );
 };
