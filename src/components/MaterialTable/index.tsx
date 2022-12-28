@@ -2,8 +2,12 @@ import React from "react";
 import MaterialTable from "material-table";
 import tableIcons from "./tableIcons";
 
-const DashboardTable: React.FC = () => {
-  console.log(tableIcons.Delete);
+interface Props {
+  dataSource: any;
+}
+
+const DashboardTable: React.FC<Props> = (props) => {
+  const { dataSource } = props;
   return (
     <MaterialTable
       icons={tableIcons}
@@ -14,17 +18,14 @@ const DashboardTable: React.FC = () => {
         },
       }}
       columns={[
-        { title: "Cliente", field: "name" },
-        { title: "Número", field: "surname" },
-        { title: "Ano", field: "birthYear", type: "numeric" },
+        { title: "Cliente", field: "userId" },
+        { title: "Número", field: "title" },
         {
           title: "Cidade",
-          field: "São Paulo",
+          field: "completed",
         },
       ]}
-      data={[
-        { name: "Mehmet", surname: "Baran", birthYear: 1987, birthCity: 63 },
-      ]}
+      data={dataSource}
       title="Tabela Tributária de: Usuário"
       actions={[
         {

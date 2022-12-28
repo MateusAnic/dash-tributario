@@ -7,6 +7,11 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 
+export const ContentPage = styled.div`
+  display: flex;
+  width: 100vw;
+`
+
 export const TitlePage = styled(Typography)`
   margin: 0 0 1.802rem 0 !important;
 `;
@@ -29,6 +34,7 @@ export const ContainerDashboard = styled(Box)`
   flex-direction: column;
   aling-items: center;
   min-height: 100vh;
+  width: 100%;
   padding: 45px;
 `;
 
