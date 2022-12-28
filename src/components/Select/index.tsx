@@ -3,30 +3,31 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent, SelectProps } from "@mui/material/Select";
+import { SelectChangeEvent, SelectProps } from "@mui/material/Select";
+import { StyledSelect } from "./style";
 
 interface Props extends SelectProps {
   handleChange?: () => void;
-  data?: Array<string>; 
+  data?: Array<string>;
   label?: string;
 }
 
-const SelectDashboard: React.FC<Props> = ({handleChange, data, label}) => {
+const SelectDashboard: React.FC<Props> = ({ handleChange, data, label }) => {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
+        <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+        <StyledSelect
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={""}
           label={label}
           onChange={handleChange}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
+          {data?.map((item, key) => {
+            return <MenuItem value={key}>{item}</MenuItem>;
+          })}
+        </StyledSelect>
       </FormControl>
     </Box>
   );

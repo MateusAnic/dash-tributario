@@ -11,7 +11,7 @@ const DashboardTable: React.FC<Props> = (props) => {
   return (
     <MaterialTable
       icons={tableIcons}
-      options={{ sorting: true }}
+      options={{ sorting: true, showTitle: false }}
       localization={{
         header: {
           actions: "",

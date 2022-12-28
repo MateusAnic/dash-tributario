@@ -17,14 +17,14 @@ const theme = createTheme({
   },
   typography: {
     h1: {
-      fontSize: "1.802rem",
+      fontSize: "1.383rem",
     },
-    h2: { fontSize: "1.602rem" },
-    h3: { fontSize: "1.424rem" },
-    h4: { fontSize: "1.266rem" },
-    h5: { fontSize: "1.125rem" },
+    h2: { fontSize: "1.296rem" },
+    h3: { fontSize: "1.215rem" },
+    h4: { fontSize: "1.138rem" },
+    h5: { fontSize: "1.067rem" },
     body1: { fontSize: "1rem" },
-    body2: { fontSize: "0.889rem" },
+    body2: { fontSize: "0.8rem" },
   },
 });
 
