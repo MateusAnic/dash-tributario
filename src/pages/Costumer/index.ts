@@ -1,0 +1,1 @@
+export { CostumerRegister } from "./Register";

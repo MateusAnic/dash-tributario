@@ -17,10 +17,12 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import DescriptionIcon from "@mui/icons-material/Description";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import { User } from "../User";
+import { useNavigate } from "react-router-dom";
 
 const SideBarDashboard: React.FC = () => {
   const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } =
     useProSidebar();
+  const navigate = useNavigate();
 
   return (
     <Sidebar collapsedWidth={"65px"}>
@@ -37,43 +39,42 @@ const SideBarDashboard: React.FC = () => {
             Comparativos
           </LabelMenu>
         </MenuItem>
-        <MenuItem onClick={() => collapseSidebar()}>
-          <LabelMenu variant="body2">
-            <AssignmentIndIcon />
-            Cadastrar de cliente
-          </LabelMenu>
-        </MenuItem>
-        <MenuItem onClick={() => collapseSidebar()}>
-          <LabelMenu variant="body2">
-            {" "}
-            <AccountBoxIcon />
-            Acompanhar cliente
-          </LabelMenu>
-        </MenuItem>
-        <MenuItem onClick={() => collapseSidebar()}>
-          <LabelMenu variant="body2">
-            <AssignmentIcon />
-            Cadastrar planejamento
-          </LabelMenu>
-        </MenuItem>
-        <MenuItem onClick={() => collapseSidebar()}>
-          <LabelMenu variant="body2">
-            <ListAltIcon />
-            Acompanhar planejamento
-          </LabelMenu>
-        </MenuItem>
-        <MenuItem onClick={() => collapseSidebar()}>
-          <LabelMenu variant="body2">
-            <DescriptionIcon />
-            Cadastrar simulada
-          </LabelMenu>
-        </MenuItem>
-        <MenuItem onClick={() => collapseSidebar()}>
-          <LabelMenu variant="body2">
-            <TimelineIcon />
-            Acompanhar simuladas
-          </LabelMenu>
-        </MenuItem>
+        <SubMenu
+          defaultOpen
+          label={<LabelMenu variant="body2">Cliente</LabelMenu>}
+          icon={<AssignmentIndIcon />}
+        >
+          <MenuItem onClick={() => navigate("/cliente/cadastro")}>
+            <LabelMenu variant="body2">Cadastrar</LabelMenu>
+          </MenuItem>
+          <MenuItem onClick={() => collapseSidebar()}>
+            <LabelMenu variant="body2">Visualização</LabelMenu>
+          </MenuItem>
+        </SubMenu>
+        <SubMenu
+          defaultOpen
+          label={<LabelMenu variant="body2">Planejamento Tributário</LabelMenu>}
+          icon={<AssignmentIcon />}
+        >
+          <MenuItem onClick={() => collapseSidebar()}>
+            <LabelMenu variant="body2">Cadastrar</LabelMenu>
+          </MenuItem>
+          <MenuItem onClick={() => collapseSidebar()}>
+            <LabelMenu variant="body2">Visualização</LabelMenu>
+          </MenuItem>
+        </SubMenu>
+        <SubMenu
+          defaultOpen
+          label={<LabelMenu variant="body2">DRE</LabelMenu>}
+          icon={<DescriptionIcon />}
+        >
+          <MenuItem onClick={() => collapseSidebar()}>
+            <LabelMenu variant="body2">Cadastrar</LabelMenu>
+          </MenuItem>
+          <MenuItem onClick={() => collapseSidebar()}>
+            <LabelMenu variant="body2">Visualização</LabelMenu>
+          </MenuItem>
+        </SubMenu>
       </Menu>
     </Sidebar>
   );

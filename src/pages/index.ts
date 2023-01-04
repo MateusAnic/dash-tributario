@@ -1,3 +1,4 @@
 export { LoginPage } from "./Login";
 export { SignUpPage } from "./SignUp";
-export { DashboardPage } from "./Dashboard";
+export { CostumerRegister } from "./Costumer";
+export { DashboardPage } from "./Dashboard"

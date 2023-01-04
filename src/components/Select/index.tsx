@@ -15,7 +15,7 @@ interface Props extends SelectProps {
 const SelectDashboard: React.FC<Props> = ({ handleChange, data, label }) => {
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
+      <FormControl fullWidth variant="filled">
         <InputLabel id="demo-simple-select-label">{label}</InputLabel>
         <StyledSelect
           labelId="demo-simple-select-label"
