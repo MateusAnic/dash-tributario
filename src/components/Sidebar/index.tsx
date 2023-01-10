@@ -56,7 +56,7 @@ const SideBarDashboard: React.FC = () => {
           label={<LabelMenu variant="body2">Planejamento Tributário</LabelMenu>}
           icon={<AssignmentIcon />}
         >
-          <MenuItem onClick={() => collapseSidebar()}>
+          <MenuItem onClick={() => navigate("/planejamento-tributario/cadastro")}>
             <LabelMenu variant="body2">Cadastrar</LabelMenu>
           </MenuItem>
           <MenuItem onClick={() => collapseSidebar()}>
@@ -68,7 +68,7 @@ const SideBarDashboard: React.FC = () => {
           label={<LabelMenu variant="body2">DRE</LabelMenu>}
           icon={<DescriptionIcon />}
         >
-          <MenuItem onClick={() => collapseSidebar()}>
+          <MenuItem onClick={() => navigate("/dre/cadastro")}>
             <LabelMenu variant="body2">Cadastrar</LabelMenu>
           </MenuItem>
           <MenuItem onClick={() => collapseSidebar()}>

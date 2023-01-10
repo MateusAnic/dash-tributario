@@ -1,0 +1,1 @@
+export { TaxRegister } from "./Register";
