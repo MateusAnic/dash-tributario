@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 export const ContainerUser = styled(Stack)`
   justify-content: center;
   align-items: center;
+  margin-top: 32px;
   margin-bottom: 64px;
 `;
 
