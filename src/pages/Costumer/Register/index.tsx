@@ -38,9 +38,16 @@ const CostumerRegister: React.FC = () => {
     dispatch(setModalVisible(true));
   };
 
+  let dataCostumer = {
+    cnpj: cnpj,
+    cnae: cnae,
+    razao: razao,
+    nomeFantasia: nome,
+  };
+
   return (
     <ContentPage>
-      <AlertDialog cnpj={cnpj} cnae={cnae} razao={razao} nomeFantasia={nome} />
+      <AlertDialog type={"customer"} data={dataCostumer} />
       <SideBarDashboard />
       <ContainerDashboard>
         <TitlePage variant="h1">Cadastro de Cliente</TitlePage>
