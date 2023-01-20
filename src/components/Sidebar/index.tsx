@@ -1,80 +1,92 @@
 import React from "react";
+import { Sidebar, Menu, SubMenu, useProSidebar } from "react-pro-sidebar";
 import {
-  Sidebar,
-  Menu,
-  MenuItem,
-  SubMenu,
-  useProSidebar,
-} from "react-pro-sidebar";
-import { LabelMenu } from "./style";
-import IconButton from "@mui/material/IconButton";
+  LabelMenu,
+  CloseButton,
+  CloseContainer,
+  StyledMenuItem,
+} from "./style";
 import CloseIcon from "@mui/icons-material/Close";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import ListAltIcon from "@mui/icons-material/ListAlt";
 import DescriptionIcon from "@mui/icons-material/Description";
-import TimelineIcon from "@mui/icons-material/Timeline";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { User } from "../User";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SideBarDashboard: React.FC = () => {
   const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } =
     useProSidebar();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  console.log(location.pathname)
 
   return (
     <Sidebar collapsedWidth={"65px"}>
       {!collapsed && (
-        <IconButton onClick={() => collapseSidebar()}>
-          <CloseIcon />
-        </IconButton>
+        <CloseContainer>
+          <CloseButton onClick={() => collapseSidebar()}>
+            <CloseIcon />
+          </CloseButton>
+        </CloseContainer>
       )}
-      {!collapsed && <User />}
+      {/* {!collapsed && <User />} */}
       <Menu>
-        <MenuItem onClick={() => collapseSidebar()}>
+        <StyledMenuItem onClick={() => collapseSidebar()}>
           <LabelMenu variant="body2">
             <AnalyticsIcon />
             Comparativos
           </LabelMenu>
-        </MenuItem>
+        </StyledMenuItem>
         <SubMenu
           defaultOpen
           label={<LabelMenu variant="body2">Cliente</LabelMenu>}
           icon={<AssignmentIndIcon />}
         >
-          <MenuItem onClick={() => navigate("/cliente/cadastro")}>
+          <StyledMenuItem
+            active={location.pathname === "/cliente/cadastro" ? true : false}
+            onClick={() => navigate("/cliente/cadastro")}
+          >
             <LabelMenu variant="body2">Cadastrar</LabelMenu>
-          </MenuItem>
-          <MenuItem onClick={() => collapseSidebar()}>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={() => collapseSidebar()}>
             <LabelMenu variant="body2">Visualização</LabelMenu>
-          </MenuItem>
+          </StyledMenuItem>
         </SubMenu>
         <SubMenu
           defaultOpen
           label={<LabelMenu variant="body2">Planejamento Tributário</LabelMenu>}
           icon={<AssignmentIcon />}
         >
-          <MenuItem onClick={() => navigate("/planejamento-tributario/cadastro")}>
+          <StyledMenuItem
+            onClick={() => navigate("/planejamento-tributario/cadastro")}
+          >
             <LabelMenu variant="body2">Cadastrar</LabelMenu>
-          </MenuItem>
-          <MenuItem onClick={() => collapseSidebar()}>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={() => collapseSidebar()}>
             <LabelMenu variant="body2">Visualização</LabelMenu>
-          </MenuItem>
+          </StyledMenuItem>
         </SubMenu>
         <SubMenu
           defaultOpen
           label={<LabelMenu variant="body2">DRE</LabelMenu>}
           icon={<DescriptionIcon />}
         >
-          <MenuItem onClick={() => navigate("/dre/cadastro")}>
+          <StyledMenuItem onClick={() => navigate("/dre/cadastro")}>
             <LabelMenu variant="body2">Cadastrar</LabelMenu>
-          </MenuItem>
-          <MenuItem onClick={() => collapseSidebar()}>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={() => collapseSidebar()}>
             <LabelMenu variant="body2">Visualização</LabelMenu>
-          </MenuItem>
+          </StyledMenuItem>
         </SubMenu>
+        <StyledMenuItem onClick={() => collapseSidebar()}>
+          <LabelMenu variant="body2">
+            <LogoutIcon />
+            Sair
+          </LabelMenu>
+        </StyledMenuItem>
       </Menu>
     </Sidebar>
   );

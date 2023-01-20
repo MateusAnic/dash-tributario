@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TitlePage, ContainerDashboard, ContentPage } from "../styles";
 import { DashboardTable } from "../../components/MaterialTable";
-import { getTesteData } from "../../services/getTest";
 import { SideBarDashboard } from "../../components";
 import { SelectDashboard } from "../../components/Select";
 import { User } from "../../components";
@@ -16,10 +15,7 @@ const DashboardPage: React.FC = () => {
 
   const [data, setData] = useState(Array<Data>);
 
-  const getData = async () => {
-    const { data: response } = await getTesteData;
-    setData(response);
-  };
+
 
   return (
     <ContentPage>

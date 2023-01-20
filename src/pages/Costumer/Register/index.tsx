@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TitlePage,
   ContainerDashboard,
@@ -6,13 +6,48 @@ import {
   InputData,
   StyledButton,
 } from "../../styles";
-import { SideBarDashboard } from "../../../components";
+import { useSelector, useDispatch } from "react-redux";
+import { AlertDialog, SideBarDashboard } from "../../../components";
 import { SelectDashboard } from "../../../components/Select";
 import Stack from "@mui/material/Stack";
+import { cnpjMask, cnaeMask } from "../../../utils/Masks";
+import { registerCostumer } from "../../../services/register";
+import { setModalVisible } from "../../../store/registerSlices/actions";
+import { RootState } from "../../../store";
 
 const CostumerRegister: React.FC = () => {
+  const [cnpj, setCnpj] = useState("");
+  const [cnae, setCnae] = useState("");
+  const [razao, setRazao] = useState("");
+  const [nome, setNome] = useState("");
+
+  const dispatch = useDispatch();
+  const { message: message } = useSelector(
+    (store: RootState) => store.messageRegister
+  );
+
+  const insertCNPJ = (value: any) => {
+    setCnpj(cnpjMask(value.target.value));
+  };
+
+  const insertCnae = (value: any) => {
+    setCnae(cnaeMask(value.target.value));
+  };
+
+  const createRegister = () => {
+    dispatch(setModalVisible(true));
+  };
+
+  let dataCostumer = {
+    cnpj: cnpj,
+    cnae: cnae,
+    razao: razao,
+    nomeFantasia: nome,
+  };
+
   return (
     <ContentPage>
+      <AlertDialog type={"customer"} data={dataCostumer} />
       <SideBarDashboard />
       <ContainerDashboard>
         <TitlePage variant="h1">Cadastro de Cliente</TitlePage>
@@ -21,8 +56,10 @@ const CostumerRegister: React.FC = () => {
             label="Razão Social"
             variant="filled"
             required
+            value={razao}
             helperText="Insira a Razão Social acima."
             size="small"
+            onChange={(value) => setRazao(value.target.value)}
           ></InputData>
           <InputData
             label="CNPJ"
@@ -30,6 +67,9 @@ const CostumerRegister: React.FC = () => {
             required
             helperText="Insira o CNPJ acima."
             size="small"
+            value={cnpj}
+            placeholder={"00.000.000/0000-00"}
+            onChange={insertCNPJ}
           ></InputData>
           <InputData
             label="Nome Fantasia"
@@ -37,14 +77,28 @@ const CostumerRegister: React.FC = () => {
             required
             helperText="Insira o Nome Fantasia acima."
             size="small"
+            value={nome}
+            onChange={(value) => setNome(value.target.value)}
           ></InputData>
-          <SelectDashboard
-            data={["Arroz", "Feijão", "Salada", "Fruta"]}
-            label="CNAI"
-          />
-          <StyledButton style={{maxWidth: 200}} color="secondary" variant="contained">
+          <InputData
+            label="CNAE"
+            variant="filled"
+            required
+            helperText="Insira o CNAE acima."
+            size="small"
+            value={cnae}
+            placeholder={"0000-0/00"}
+            onChange={insertCnae}
+          ></InputData>
+          <StyledButton
+            style={{ maxWidth: 200 }}
+            color="secondary"
+            variant="contained"
+            onClick={createRegister}
+          >
             Cadastrar
           </StyledButton>
+          <p>{message}</p>
         </Stack>
       </ContainerDashboard>
     </ContentPage>

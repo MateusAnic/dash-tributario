@@ -18,21 +18,14 @@ const DreRegister: React.FC = () => {
       <ContainerDashboard>
         <TitlePage variant="h1">Cadastro de DRE</TitlePage>
         <Stack spacing={2}>
-          <DataGridEdit />
-          <InputData
-            label="Razão Social"
-            variant="filled"
-            required
-            helperText="Insira a Razão Social acima."
-            size="small"
-          ></InputData>
-          <StyledButton
+          {/* <StyledButton
             style={{ maxWidth: 200 }}
             color="secondary"
             variant="contained"
           >
             Cadastrar
-          </StyledButton>
+          </StyledButton> */}
+          <DataGridEdit />
         </Stack>
       </ContainerDashboard>
     </ContentPage>
