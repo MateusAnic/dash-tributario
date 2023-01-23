@@ -31,25 +31,4 @@ const registerCustomer = async (
   return response;
 };
 
-const registerTax = async (
-  anoReferencia: number,
-  idCliente: string,
-  dispatch: any
-) => {
-  let response = await client
-    .post("/planejamentoTributario", {
-      anoReferencia: anoReferencia,
-      idCliente: idCliente,
-    })
-    .then((res) => {
-      dispatch(setMessageRegister(res.data.message));
-      dispatch(setLoadingVisible(false));
-    })
-    .catch((err) => {
-      dispatch(setMessageRegister(err.response.data.message));
-      dispatch(setLoadingVisible(false));
-    });
-  return response;
-};
-
-export { registerCustomer, registerTax };
+export { registerCustomer };

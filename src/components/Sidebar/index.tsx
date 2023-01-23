@@ -21,8 +21,6 @@ const SideBarDashboard: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.pathname)
-
   return (
     <Sidebar collapsedWidth={"65px"}>
       {!collapsed && (
@@ -51,7 +49,7 @@ const SideBarDashboard: React.FC = () => {
           >
             <LabelMenu variant="body2">Cadastrar</LabelMenu>
           </StyledMenuItem>
-          <StyledMenuItem onClick={() => collapseSidebar()}>
+          <StyledMenuItem onClick={() => navigate("/cliente/visualizacao")}>
             <LabelMenu variant="body2">Visualização</LabelMenu>
           </StyledMenuItem>
         </SubMenu>
@@ -65,7 +63,9 @@ const SideBarDashboard: React.FC = () => {
           >
             <LabelMenu variant="body2">Cadastrar</LabelMenu>
           </StyledMenuItem>
-          <StyledMenuItem onClick={() => collapseSidebar()}>
+          <StyledMenuItem
+            onClick={() => navigate("/planejamento-tributario/visualizacao")}
+          >
             <LabelMenu variant="body2">Visualização</LabelMenu>
           </StyledMenuItem>
         </SubMenu>

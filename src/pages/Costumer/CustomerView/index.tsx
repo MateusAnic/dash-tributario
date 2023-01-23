@@ -11,11 +11,10 @@ import { AlertDialog, SideBarDashboard } from "../../../components";
 import { SelectDashboard } from "../../../components/Select";
 import Stack from "@mui/material/Stack";
 import { cnpjMask, cnaeMask } from "../../../utils/Masks";
-import { registerCustomer } from "../../../services/register";
 import { setModalVisible } from "../../../store/registerSlices/actions";
 import { RootState } from "../../../store";
 
-const CustomerRegister: React.FC = () => {
+const CustomerView: React.FC = () => {
   const [cnpj, setCnpj] = useState("");
   const [cnae, setCnae] = useState("");
   const [razao, setRazao] = useState("");
@@ -50,45 +49,49 @@ const CustomerRegister: React.FC = () => {
       <AlertDialog type={"customer"} data={dataCostumer} />
       <SideBarDashboard />
       <ContainerDashboard>
-        <TitlePage variant="h1">Cadastro de Cliente</TitlePage>
+        <TitlePage variant="h1">Visualização de Cliente</TitlePage>
         <Stack spacing={2}>
+          <SelectDashboard
+            data={["Arroz", "Feijão", "Salada", "Fruta"]}
+            label="Nome do Cliente"
+          />
           <InputData
             label="Razão Social"
             variant="filled"
             required
             value={razao}
-            helperText="Insira a Razão Social acima."
             size="small"
             onChange={(value) => setRazao(value.target.value)}
+            disabled={true}
           ></InputData>
           <InputData
             label="CNPJ"
             variant="filled"
             required
-            helperText="Insira o CNPJ acima."
             size="small"
             value={cnpj}
             placeholder={"00.000.000/0000-00"}
             onChange={insertCNPJ}
+            disabled={true}
           ></InputData>
           <InputData
             label="Nome Fantasia"
             variant="filled"
             required
-            helperText="Insira o Nome Fantasia acima."
             size="small"
             value={nome}
             onChange={(value) => setNome(value.target.value)}
+            disabled={true}
           ></InputData>
           <InputData
             label="CNAE"
             variant="filled"
             required
-            helperText="Insira o CNAE acima."
             size="small"
             value={cnae}
             placeholder={"0000-0/00"}
             onChange={insertCnae}
+            disabled={true}
           ></InputData>
           <StyledButton
             style={{ maxWidth: 200 }}
@@ -96,7 +99,15 @@ const CustomerRegister: React.FC = () => {
             variant="contained"
             onClick={createRegister}
           >
-            Cadastrar
+            Atualizar
+          </StyledButton>
+          <StyledButton
+            style={{ maxWidth: 200 }}
+            color="secondary"
+            variant="contained"
+            onClick={createRegister}
+          >
+            Remover
           </StyledButton>
           <p>{message}</p>
         </Stack>
@@ -105,4 +116,4 @@ const CustomerRegister: React.FC = () => {
   );
 };
 
-export { CustomerRegister };
+export { CustomerView };

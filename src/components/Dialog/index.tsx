@@ -11,7 +11,7 @@ import {
   setModalVisible,
 } from "../../store/registerSlices/actions";
 import { RootState } from "../../store";
-import { registerCostumer, registerTax } from "../../services/register";
+import { registerCustomer, registerTax } from "../../services/register";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Typography } from "@mui/material";
 
@@ -29,8 +29,8 @@ const AlertDialog: React.FC<Props> = (props) => {
   );
 
   const typeRegister = {
-    costumer: () =>
-      registerCostumer(
+    customer: () =>
+      registerCustomer(
         data.razao,
         data.cnpj,
         data.nomeFantasia,
@@ -48,7 +48,7 @@ const AlertDialog: React.FC<Props> = (props) => {
 
   const handleRegister = () => {
     dispatch(setLoadingVisible(true));
-    typeRegister.tax();
+    type === "customer" ? typeRegister.customer() : typeRegister.tax();
     handleClose();
   };
 
