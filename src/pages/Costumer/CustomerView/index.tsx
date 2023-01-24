@@ -35,7 +35,6 @@ const CustomerView: React.FC = () => {
     ativo: true,
     __v: 0,
   });
-
   const dispatch = useDispatch();
   const { message: message } = useSelector(
     (store: RootState) => store.messageRegister
@@ -81,14 +80,14 @@ const CustomerView: React.FC = () => {
     _id: currentSelected._id,
     ativo: currentSelected.ativo,
   };
+  const getData = async () => {
+    const listCustomers = await listCustomer("63c542c72c5dd0f675cdd016");
+    setListOfCustomer(listCustomers);
+  };
 
   useEffect(() => {
-    const getData = async () => {
-      const listCustomers = await listCustomer("63c542c72c5dd0f675cdd016");
-      setListOfCustomer(listCustomers);
-    };
     getData();
-  }, [listOfCustomers]);
+  }, []);
 
   useEffect(() => {
     updateInputs();
@@ -104,6 +103,7 @@ const CustomerView: React.FC = () => {
       ativo: true,
       __v: 0,
     });
+    getData();
   }, [message]);
 
   return (
