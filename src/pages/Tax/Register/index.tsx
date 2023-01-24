@@ -60,6 +60,7 @@ const TaxRegister: React.FC = () => {
           <SelectDashboard
             data={["Arroz", "Feijão", "Salada", "Fruta"]}
             label="Nome do Cliente"
+            type="default"
           />
           <StyledButton
             style={{ maxWidth: 200 }}

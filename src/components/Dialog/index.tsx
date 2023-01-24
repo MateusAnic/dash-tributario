@@ -14,6 +14,9 @@ import { RootState } from "../../store";
 import { registerCustomer, registerTax } from "../../services/register";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Typography } from "@mui/material";
+import { updateCustomer } from "../../services/update";
+import { deleteCustomer } from "../../services/delete";
+import { setCurrentCustomer } from "../../store/updateSlices/actions";
 
 interface Props {
   type: string;
@@ -23,12 +26,13 @@ interface Props {
 const AlertDialog: React.FC<Props> = (props) => {
   const { type, data } = props;
   const dispatch = useDispatch();
+  const refresh = () => window.location.reload();
 
   const { visible: modalVisible, loading: loadingVisible } = useSelector(
     (store: RootState) => store.modalRegister
   );
 
-  const typeRegister = {
+  const typeAction: { [index: string]: any } = {
     customer: () =>
       registerCustomer(
         data.razao,
@@ -40,6 +44,20 @@ const AlertDialog: React.FC<Props> = (props) => {
       ),
     tax: () =>
       registerTax(data.anoReferencia, "639d1a6b13a1dda7a9bd929e", dispatch),
+    updateCustomer: () => {
+      updateCustomer(
+        data.razao,
+        data.cnpj,
+        data.nomeFantasia,
+        data.cnae,
+        data._id,
+        true,
+        dispatch
+      );
+    },
+    deleteCustomer: () => {
+      deleteCustomer(data._id, dispatch);
+    },
   };
 
   const handleClose = () => {
@@ -48,7 +66,7 @@ const AlertDialog: React.FC<Props> = (props) => {
 
   const handleRegister = () => {
     dispatch(setLoadingVisible(true));
-    type === "customer" ? typeRegister.customer() : typeRegister.tax();
+    typeAction[type]();
     handleClose();
   };
 
@@ -58,6 +76,13 @@ const AlertDialog: React.FC<Props> = (props) => {
     { nome: "Nome Fantasia", data: data.nomeFantasia },
     { nome: "CNAE", data: data.cnae },
   ];
+
+  const titles: { [index: string]: any } = {
+    customer: "Tem certeza de que deseja cadastrar esse cliente?",
+    updateCustomer: "Tem certeza de que deseja alterar esse cliente?",
+    deleteCustomer: "Tem certeza de que deseja remover esse cliente?",
+    tax: "Tem certeza de que deseja cadastrar esse planejamento?",
+  };
 
   const listTax = [{ nome: "Ano Referência", data: data.anoReferencia }];
 
@@ -81,16 +106,14 @@ const AlertDialog: React.FC<Props> = (props) => {
           </DialogContent>
         ) : (
           <>
-            <DialogTitle id="alert-dialog-title">
-              {type === "customer"
-                ? "Tem certeza de que deseja cadastrar esse cliente?"
-                : "Tem certeza de que deseja cadastrar esse planejamento?"}
-            </DialogTitle>
+            <DialogTitle id="alert-dialog-title">{titles[type]}</DialogTitle>
             <DialogContent>
-              {type === "customer" ? (
+              {type === "customer" ||
+              type === "updateCustomer" ||
+              type === "deleteCustomer" ? (
                 <ul>
-                  {listCustomer.map((item) => (
-                    <li>
+                  {listCustomer.map((item, key) => (
+                    <li key={key}>
                       <Typography variant="body1">
                         {item.nome}: {item.data === "" ? "N/A" : item.data}
                       </Typography>
@@ -99,8 +122,8 @@ const AlertDialog: React.FC<Props> = (props) => {
                 </ul>
               ) : (
                 <ul>
-                  {listTax.map((item) => (
-                    <li>
+                  {listTax.map((item, key) => (
+                    <li key={key}>
                       <Typography variant="body1">
                         {item.nome}: {item.data === "" ? "N/A" : item.data}
                       </Typography>

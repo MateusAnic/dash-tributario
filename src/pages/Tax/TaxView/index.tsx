@@ -38,8 +38,10 @@ const TaxView: React.FC = () => {
       <AlertDialog type={"tax"} data={dataTax} />
       <SideBarDashboard />
       <ContainerDashboard>
-        <TitlePage variant="h1">Atualização de Planejamento Tributario</TitlePage>
-        <Stack spacing={2}></Stack>
+        <TitlePage variant="h1">
+          Atualização de Planejamento Tributario
+        </TitlePage>
+        <Stack spacing={2}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               views={["year"]}
@@ -60,6 +62,7 @@ const TaxView: React.FC = () => {
           <SelectDashboard
             data={["Arroz", "Feijão", "Salada", "Fruta"]}
             label="Nome do Cliente"
+            type="default"
           />
           <StyledButton
             style={{ maxWidth: 200 }}
