@@ -17,7 +17,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { RootState } from "../../../store";
 import Stack from "@mui/material/Stack";
 
-const TaxRegister: React.FC = () => {
+const TaxView: React.FC = () => {
   const [value, setValue] = useState<any>(0);
   const dispatch = useDispatch();
 
@@ -38,7 +38,9 @@ const TaxRegister: React.FC = () => {
       <AlertDialog type={"tax"} data={dataTax} />
       <SideBarDashboard />
       <ContainerDashboard>
-        <TitlePage variant="h1">Cadastro de Planejamento Tributario</TitlePage>
+        <TitlePage variant="h1">
+          Atualização de Planejamento Tributario
+        </TitlePage>
         <Stack spacing={2}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
@@ -68,7 +70,15 @@ const TaxRegister: React.FC = () => {
             variant="contained"
             onClick={createRegisterTax}
           >
-            Cadastrar
+            Atualizar
+          </StyledButton>
+          <StyledButton
+            style={{ maxWidth: 200 }}
+            color="secondary"
+            variant="contained"
+            onClick={createRegisterTax}
+          >
+            Remover
           </StyledButton>
           <p>{message}</p>
         </Stack>
@@ -77,4 +87,4 @@ const TaxRegister: React.FC = () => {
   );
 };
 
-export { TaxRegister };
+export { TaxView };

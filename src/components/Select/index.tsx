@@ -1,18 +1,54 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { SelectChangeEvent, SelectProps } from "@mui/material/Select";
 import { StyledSelect } from "./style";
+import { setMessageRegister } from "../../store/registerSlices/actions";
 
 interface Props extends SelectProps {
-  handleChange?: () => void;
-  data?: Array<string>;
+  data?: Array<any>;
   label?: string;
+  type: string;
+  change?: (params: any) => void;
 }
 
-const SelectDashboard: React.FC<Props> = ({ handleChange, data, label }) => {
+const SelectDashboard: React.FC<Props> = ({ data, label, type, change }) => {
+  const [value, setValue] = useState<string>("");
+  const dispatch = useDispatch();
+
+  const handleChange = (e: any) => {
+    setValue(e.target.value as string);
+    dispatch(setMessageRegister(""));
+    if (change) {
+      return change(e.target.value);
+    }
+  };
+
+  const createMenu = () => {
+    const menuToCreate: { [index: string]: any } = {
+      customer: () =>
+        data?.map((item, key) => {
+          return (
+            <MenuItem value={item._id} key={key}>
+              {item.razaoSocial}
+            </MenuItem>
+          );
+        }),
+      default: () =>
+        data?.map((item, key) => {
+          return (
+            <MenuItem value={item} key={key}>
+              {item}
+            </MenuItem>
+          );
+        }),
+    };
+    return menuToCreate[type]();
+  };
+
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth variant="filled">
@@ -20,21 +56,15 @@ const SelectDashboard: React.FC<Props> = ({ handleChange, data, label }) => {
         <StyledSelect
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={""}
+          value={value}
           label={label}
-          onChange={handleChange}
+          onChange={(e) => handleChange(e)}
         >
-          {data?.map((item, key) => {
-            return <MenuItem value={key}>{item}</MenuItem>;
-          })}
+          {createMenu()}
         </StyledSelect>
       </FormControl>
     </Box>
   );
 };
-
-// const handleChange = (event: SelectChangeEvent) => {
-//     setAge(event.target.value as string);
-//   };
 
 export { SelectDashboard };

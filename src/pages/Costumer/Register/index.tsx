@@ -11,11 +11,11 @@ import { AlertDialog, SideBarDashboard } from "../../../components";
 import { SelectDashboard } from "../../../components/Select";
 import Stack from "@mui/material/Stack";
 import { cnpjMask, cnaeMask } from "../../../utils/Masks";
-import { registerCostumer } from "../../../services/register";
+import { registerCustomer } from "../../../services/register";
 import { setModalVisible } from "../../../store/registerSlices/actions";
 import { RootState } from "../../../store";
 
-const CostumerRegister: React.FC = () => {
+const CustomerRegister: React.FC = () => {
   const [cnpj, setCnpj] = useState("");
   const [cnae, setCnae] = useState("");
   const [razao, setRazao] = useState("");
@@ -105,4 +105,4 @@ const CostumerRegister: React.FC = () => {
   );
 };
 
-export { CostumerRegister };
+export { CustomerRegister };

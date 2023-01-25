@@ -4,7 +4,7 @@ import {
   setMessageRegister,
 } from "../store/registerSlices/actions";
 
-const registerCostumer = async (
+const registerCustomer = async (
   razaoSocial: string,
   cnpj: string,
   nomeFantasia: string,
@@ -52,4 +52,4 @@ const registerTax = async (
   return response;
 };
 
-export { registerCostumer, registerTax };
+export { registerCustomer, registerTax };

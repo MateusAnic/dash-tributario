@@ -1,1 +1,2 @@
-export { CostumerRegister } from "./Register";
+export { CustomerRegister } from "./Register";
+export { CustomerView } from "./CustomerView";
