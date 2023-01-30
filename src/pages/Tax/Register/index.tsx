@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TitlePage,
   ContainerDashboard,
@@ -16,9 +16,11 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { RootState } from "../../../store";
 import Stack from "@mui/material/Stack";
+import { getListOfCustomer } from "../../../utils/GetListOfCustomer";
 
 const TaxRegister: React.FC = () => {
   const [value, setValue] = useState<any>(0);
+  const [listOfCustomer, setListOfCustomer] = useState<Array<string>>([""]);
   const dispatch = useDispatch();
 
   const { message: message } = useSelector(
@@ -33,6 +35,10 @@ const TaxRegister: React.FC = () => {
     anoReferencia: value.$y,
   };
 
+  useEffect(() => {
+    getListOfCustomer(setListOfCustomer, "customerTax");
+  }, []);
+
   return (
     <ContentPage>
       <AlertDialog type={"tax"} data={dataTax} />
@@ -40,26 +46,14 @@ const TaxRegister: React.FC = () => {
       <ContainerDashboard>
         <TitlePage variant="h1">Cadastro de Planejamento Tributario</TitlePage>
         <Stack spacing={2}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              views={["year"]}
-              label="Ano Referência"
-              value={value}
-              onChange={(newValue) => {
-                setValue(newValue);
-              }}
-              renderInput={(params) => (
-                <TextField
-                  style={{ maxWidth: 200 }}
-                  {...params}
-                  helperText={null}
-                />
-              )}
-            />
-          </LocalizationProvider>
           <SelectDashboard
-            data={["Arroz", "Feijão", "Salada", "Fruta"]}
+            data={listOfCustomer}
             label="Nome do Cliente"
+            type="customer"
+          />
+          <SelectDashboard
+            data={listOfCustomer}
+            label="Ano de Referência"
             type="default"
           />
           <StyledButton

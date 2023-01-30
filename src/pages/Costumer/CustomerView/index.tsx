@@ -17,6 +17,7 @@ import { listCustomer } from "../../../services/listUser";
 import { getCustomer } from "../../../services/getInfo";
 import { setCurrentCustomer } from "../../../store/updateSlices/actions";
 import { Customer } from "../../../store/interfaces/Customer";
+import { getListOfCustomer } from "../../../utils/GetListOfCustomer";
 
 const CustomerView: React.FC = () => {
   const [cnpj, setCnpj] = useState("");
@@ -80,13 +81,9 @@ const CustomerView: React.FC = () => {
     _id: currentSelected._id,
     ativo: currentSelected.ativo,
   };
-  const getData = async () => {
-    const listCustomers = await listCustomer("63c542c72c5dd0f675cdd016");
-    setListOfCustomer(listCustomers);
-  };
 
   useEffect(() => {
-    getData();
+    getListOfCustomer(setListOfCustomer, "customer");
   }, []);
 
   useEffect(() => {
@@ -103,7 +100,6 @@ const CustomerView: React.FC = () => {
       ativo: true,
       __v: 0,
     });
-    getData();
   }, [message]);
 
   return (
@@ -159,15 +155,15 @@ const CustomerView: React.FC = () => {
           ></InputData>
           <StyledButton
             style={{ maxWidth: 200 }}
-            color="secondary"
             variant="contained"
             onClick={updateInfo}
+            color="secondary"
           >
             Atualizar
           </StyledButton>
           <StyledButton
             style={{ maxWidth: 200 }}
-            color="secondary"
+            color="error"
             variant="contained"
             onClick={deleteCustomer}
           >
