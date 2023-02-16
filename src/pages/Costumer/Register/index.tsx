@@ -92,9 +92,9 @@ const CustomerRegister: React.FC = () => {
           ></InputData>
           <StyledButton
             style={{ maxWidth: 200 }}
-            color="secondary"
             variant="contained"
             onClick={createRegister}
+            color="secondary"
           >
             Cadastrar
           </StyledButton>

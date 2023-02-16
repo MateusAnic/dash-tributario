@@ -78,13 +78,52 @@ const AlertDialog: React.FC<Props> = (props) => {
   ];
 
   const titles: { [index: string]: any } = {
-    customer: "Tem certeza de que deseja cadastrar esse cliente?",
-    updateCustomer: "Tem certeza de que deseja alterar esse cliente?",
-    deleteCustomer: "Tem certeza de que deseja remover esse cliente?",
-    tax: "Tem certeza de que deseja cadastrar esse planejamento?",
+    customer: (
+      <Typography variant="h2">
+        Tem certeza de que deseja{" "}
+        <span style={{ color: "#1c4e80" }}>cadastrar</span> esse cliente?
+      </Typography>
+    ),
+    updateCustomer: (
+      <Typography variant="h2">
+        Tem certeza de que deseja{" "}
+        <span style={{ color: "#1c4e80" }}>alterar</span> esse cliente?
+      </Typography>
+    ),
+    deleteCustomer: (
+      <Typography variant="h2">
+        Tem certeza de que deseja{" "}
+        <span style={{ color: "#f44336" }}>remover</span> esse cliente?
+      </Typography>
+    ),
+    tax: (
+      <Typography variant="h2">
+        Tem certeza de que deseja{" "}
+        <span style={{ color: "#1c4e80" }}>cadastrar</span> esse planejamento?
+      </Typography>
+    ),
+    taxSimulate: (
+      <Typography variant="h2">
+        Tem certeza de que deseja{" "}
+        <span style={{ color: "#2e7d32" }}>simular</span> esse planejamento?
+      </Typography>
+    ),
+    taxEditDRE: (
+      <Typography variant="h2">
+        Tem certeza de que deseja{" "}
+        <span style={{ color: "#1c4e80" }}>editar o DRE</span> desse
+        planejamento?
+      </Typography>
+    ),
+    taxDelete: (
+      <Typography variant="h2">
+        Tem certeza de que deseja{" "}
+        <span style={{ color: "#f44336" }}>remover</span> esse planejamento?
+      </Typography>
+    ),
   };
 
-  const listTax = [{ nome: "Ano Referência", data: data.anoReferencia }];
+  const listTax = [{ nome: "Nome do Cliente", data: data.razaoSocial }, { nome: "Ano Referência", data: data.anoReferencia }];
 
   return (
     <div>

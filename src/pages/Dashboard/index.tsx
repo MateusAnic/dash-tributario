@@ -22,7 +22,7 @@ const DashboardPage: React.FC = () => {
       <SideBarDashboard />
       <ContainerDashboard>
         <TitlePage variant="h1">Acompanhamento de Cliente : Anônimo</TitlePage>
-        <SelectDashboard data={["Arroz", "Feijão", "Salada", "Fruta"]} label="COmidinhas" type="default" />
+        <SelectDashboard label="COmidinhas" type="default" />
         <DashboardTable dataSource={data} />
       </ContainerDashboard>
     </ContentPage>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TitlePage,
   ContainerDashboard,
@@ -16,10 +16,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { RootState } from "../../../store";
 import Stack from "@mui/material/Stack";
+import { getListOfCustomer } from "../../../utils/GetListOfCustomer";
 
 const TaxView: React.FC = () => {
   const [value, setValue] = useState<any>(0);
   const dispatch = useDispatch();
+  const [listOfCustomer, setListOfCustomer] = useState<Array<string>>([""]);
+  const [typeModal, setTypeModal] = useState<string>("");
 
   const { message: message } = useSelector(
     (store: RootState) => store.messageRegister
@@ -33,50 +36,65 @@ const TaxView: React.FC = () => {
     anoReferencia: value.$y,
   };
 
+  useEffect(() => {
+    getListOfCustomer(setListOfCustomer, "customer");
+  });
+
+  const simulateTax = () => {
+    setTypeModal("taxSimulate");
+    dispatch(setModalVisible(true));
+  };
+
+  const editDRE = () => {
+    setTypeModal("taxEditDRE");
+    dispatch(setModalVisible(true));
+  };
+
+  const deleteTax = () => {
+    setTypeModal("taxDelete");
+    dispatch(setModalVisible(true));
+  };
+
   return (
     <ContentPage>
-      <AlertDialog type={"tax"} data={dataTax} />
+      <AlertDialog type={typeModal} data={dataTax} />
       <SideBarDashboard />
       <ContainerDashboard>
         <TitlePage variant="h1">
-          Atualização de Planejamento Tributario
+          Visualização de Planejamento Tributario
         </TitlePage>
         <Stack spacing={2}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              views={["year"]}
-              label="Ano Referência"
-              value={value}
-              onChange={(newValue) => {
-                setValue(newValue);
-              }}
-              renderInput={(params) => (
-                <TextField
-                  style={{ maxWidth: 200 }}
-                  {...params}
-                  helperText={null}
-                />
-              )}
-            />
-          </LocalizationProvider>
           <SelectDashboard
-            data={["Arroz", "Feijão", "Salada", "Fruta"]}
+            data={listOfCustomer}
             label="Nome do Cliente"
+            type="customer"
+          />
+          <SelectDashboard
+            data={listOfCustomer}
+            label="Ano de Referência"
             type="default"
           />
           <StyledButton
             style={{ maxWidth: 200 }}
-            color="secondary"
             variant="contained"
-            onClick={createRegisterTax}
+            color="success"
+            onClick={simulateTax}
           >
-            Atualizar
+            Simular
           </StyledButton>
           <StyledButton
             style={{ maxWidth: 200 }}
             color="secondary"
             variant="contained"
-            onClick={createRegisterTax}
+            onClick={editDRE}
+          >
+            Editar DRE
+          </StyledButton>
+          <StyledButton
+            style={{ maxWidth: 200 }}
+            variant="contained"
+            onClick={deleteTax}
+            color="error"
           >
             Remover
           </StyledButton>

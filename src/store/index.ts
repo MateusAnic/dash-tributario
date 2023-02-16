@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { dataGridSlice } from "./dataGridSlices/slice";
 import {
   ConfirmRegisterSlice,
   messageRegisterSlice,
@@ -12,5 +13,6 @@ export const store = configureStore({
     modalRegister: ConfirmRegisterSlice.reducer,
     messageRegister: messageRegisterSlice.reducer,
     currentCustomer: selectedCustomer.reducer,
+    dataGrid: dataGridSlice.reducer,
   },
 });

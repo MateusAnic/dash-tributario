@@ -12,4 +12,6 @@ const getCustomer = async (idUsuario: string) => {
   return response;
 };
 
+
+
 export { getCustomer };

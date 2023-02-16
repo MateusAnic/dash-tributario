@@ -32,12 +32,6 @@ const SideBarDashboard: React.FC = () => {
       )}
       {/* {!collapsed && <User />} */}
       <Menu>
-        <StyledMenuItem onClick={() => collapseSidebar()}>
-          <LabelMenu variant="body2">
-            <AnalyticsIcon />
-            Comparativos
-          </LabelMenu>
-        </StyledMenuItem>
         <SubMenu
           defaultOpen
           label={<LabelMenu variant="body2">Cliente</LabelMenu>}
@@ -67,6 +61,16 @@ const SideBarDashboard: React.FC = () => {
             onClick={() => navigate("/planejamento-tributario/visualizacao")}
           >
             <LabelMenu variant="body2">Visualização</LabelMenu>
+          </StyledMenuItem>
+          <StyledMenuItem
+            onClick={() => navigate("/planejamento-tributario/visualizacao")}
+          >
+            <LabelMenu variant="body2">Simulações</LabelMenu>
+          </StyledMenuItem>
+          <StyledMenuItem
+            onClick={() => navigate("/planejamento-tributario/visualizacao")}
+          >
+            <LabelMenu variant="body2">Comparativos</LabelMenu>
           </StyledMenuItem>
         </SubMenu>
         <SubMenu

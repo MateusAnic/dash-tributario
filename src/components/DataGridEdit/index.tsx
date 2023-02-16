@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { render } from "react-dom";
 import { AgGridReact, AgGridColumn } from "ag-grid-react";
 import { StyledButton } from "../../pages/styles";
@@ -7,9 +7,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Stack from "@mui/material/Stack";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setDataGridData } from "../../store/dataGridSlices/actions";
+import { RootState } from "../../store";
 
 const DataGridEdit = () => {
-  const [rowData] = useState([
+  const [rowData, setRowData] = useState([
     { "Receitas Operacionais": "SERVIÇOS PRESTADOS" },
     { "Receitas Operacionais": "IMPOSTOS INCIDENTES S/ VENDAS" },
     { "Receitas Operacionais": "DESCONTOS INCONDICIONAIS" },
@@ -31,6 +34,10 @@ const DataGridEdit = () => {
     { "Receitas Operacionais": "PROVISÃO DE CONTRIBUIÇÃO SOCIAL" },
     { "Receitas Operacionais": "LUCRO PREJUIZO PERIODO" },
   ]);
+
+  const { data: dataGridData } = useSelector(
+    (store: RootState) => store.dataGrid
+  );
 
   const [columnDefs] = useState([
     {
@@ -63,6 +70,7 @@ const DataGridEdit = () => {
   ]);
 
   const gridRef = useRef(null);
+  const dispatch = useDispatch();
 
   const [gridApi, setGridApi] = useState<any>(null);
   const [gridColumnApi, setGridColumnApi] = useState<any>(null);
@@ -80,11 +88,9 @@ const DataGridEdit = () => {
     <div className="ag-theme-alpine" style={{ height: "600px" }}>
       <AgGridReact
         editType="fullRow"
-        onCellValueChanged={(value) => console.log(value)}
+        onCellValueChanged={() => console.log(rowData)}
         ref={gridRef}
         rowData={rowData}
-        rowSelection={"multiple"}
-        rowMultiSelectWithClick={true}
         columnDefs={columnDefs}
         onGridReady={onGridReady}
         autoGroupColumnDef={{ minWidth: 200 }}
